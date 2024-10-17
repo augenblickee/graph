@@ -35,7 +35,7 @@
             height: 100%;
             border: none;
         }
-        @media (max-width: 100%) {
+        @media (max-width: 600px) {
             h1 {
                 font-size: 20px;
             }
@@ -79,12 +79,14 @@
             let currentTime = getCurrentTime();
             let currentDay = getCurrentDay();
             let worker = "Неучебное время";
+            let phone = "";  // Переменная для хранения номера телефона
 
             // Расписание
             switch (currentDay) {
                 case "Monday":
                     if (currentTime >= "08:00" && currentTime <= "21:00") {
                         worker = "Максим";
+                        phone = "+79963790514"; // Номер телефона Максима
                     }
                     break;
 
@@ -93,32 +95,42 @@
                 case "Thursday":
                     if (currentTime >= "08:00" && currentTime < "12:00") {
                         worker = "Максим";
+                        phone = "+79963790514"; // Номер телефона Максима
                     } else if (currentTime >= "12:00" && currentTime <= "21:00") {
                         worker = "Иван";
+                        phone = "+79963827993"; // Номер телефона Ивана
                     }
                     break;
 
                 case "Friday":
                     if (currentTime >= "08:00" && currentTime <= "21:00") {
                         worker = "Иван";
+                        phone = "+79963827993"; // Номер телефона Ивана
                     }
                     break;
 
                 case "Saturday":
                     if (currentTime >= "08:00" && currentTime < "12:00") {
                         worker = "Иван";
+                        phone = "+79963827993"; // Номер телефона Ивана
                     } else if (currentTime >= "12:00" && currentTime <= "19:00") {
                         worker = "Максим";
+                        phone = "+79963790514"; // Номер телефона Максима
                     }
                     break;
 
                 case "Sunday":
                     worker = "Выходной";
+                    phone = ""; // В выходной нет номера телефона
                     break;
             }
 
-            // Выводим, кто сейчас работает
-            document.getElementById("worker").innerText = worker;
+            // Выводим, кто сейчас работает с возможностью звонка
+            if (phone) {
+                document.getElementById("worker").innerHTML = `<a href="tel:${phone}" style="color:green; text-decoration:none;">${worker}</a>`;
+            } else {
+                document.getElementById("worker").innerText = worker;
+            }
         }
 
         // Запускаем функцию при загрузке страницы
