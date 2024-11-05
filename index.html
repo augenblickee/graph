@@ -9,23 +9,37 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f3f3f3;
+            color: #333;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: whitesmoke;
+            color: white;
+        }
+        header img {
+            height: 50px;
+            margin-right: 15px;
         }
         h1 {
-            text-align: center;
             font-size: 24px;
-            margin-top: 10px;
+            text-align: center;
+            margin-top: 20px;
+            color: black;
         }
         #worker {
             font-size: 32px;
-            color: green;
+            color: #006400;
             text-align: center;
             margin: 10px 0;
         }
         .iframe-container {
             position: relative;
             width: 100%;
-            height: 90vh; /* Высота контейнера для iframe */
-            overflow: hidden; /* Скрыть прокрутку */
+            height: 90vh;
+            overflow: hidden;
         }
         iframe {
             position: absolute;
@@ -35,6 +49,34 @@
             height: 100%;
             border: none;
         }
+        .question-section {
+            text-align: center;
+            margin: 20px;
+        }
+        .question-toggle {
+            font-size: 16px;
+            color: #006400;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .question-toggle:hover {
+            color: black;
+        }
+
+        .fio {
+            font-size: 18px;
+            color: #006400;
+            text-align: center;
+            margin: 10px 0;
+        }
         @media (max-width: 600px) {
             h1 {
                 font-size: 20px;
@@ -43,31 +85,43 @@
                 font-size: 24px;
             }
             iframe {
-                transform: scale(1); /* Масштабирование только для мобильной версии */
-                transform-origin: 0 0; /* Настройка точки масштабирования */
-                height: 140%; /* Увеличиваем высоту для улучшения видимости */
+                transform: scale(0.7);
+                transform-origin: 0 0;
+                height: 140%;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Кто сейчас работает?</h1>
+    <header>
+        <img src="nstu.png" alt="Логотип НГТУ">
+        <h1>ЛКС ФБ НГТУ, 6 корпус 707 кабинет</h1>
+    </header>
     <div id="worker">Загрузка...</div>
-    <div class="iframe-container">
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTK40_61X6tohrrwyPfrjFiEm5WPp668iRg8bXJ6jD20L1AIWODVnMJxKfnBfuaxA/pubhtml?gid=1991725212&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+    <div class="fio"> Нажмите на ФИО для звонка</div>
+
+    <div class="question-section">
+        <span class="question-toggle" onclick="toggleAnswer()">По каким вопросам обращаться?</span>
+        <div id="answer" class="answer">
+            <ul>
+                <li>
+                    Не функционирует техника: не включается компьютер, монитор, телевизор, не работает или некорректно работает принтер и так далее.
+                </li>
+                <li>
+                    Подключение микрофона или веб-камеры для проведения онлайн-конференции
+                </li>
+            </ul>
+            <i>Если в рамках дисциплины необходима установка нового програмного обеспечения - обращайтесь в 6-705а</i>
+        </div>
     </div>
+
     <script>
-        // Определяем текущее время и день недели
         function getCurrentTime() {
             let now = new Date();
             let hours = now.getHours();
             let minutes = now.getMinutes();
-            if (minutes < 10) {
-                minutes = '0' + minutes;
-            }
-            if (hours < 10) {
-                hours = '0' + hours;
-            }
+            if (minutes < 10) minutes = '0' + minutes;
+            if (hours < 10) hours = '0' + hours;
             return hours + ':' + minutes;
         }
 
@@ -77,69 +131,68 @@
             return days[now.getDay()];
         }
 
-        // Функция для проверки, кто сейчас работает
         function whoIsWorkingNow() {
             let currentTime = getCurrentTime();
             let currentDay = getCurrentDay();
             let worker = "Неучебное время";
-            let phone = "";  // Переменная для хранения номера телефона
+            let phone = "";
 
-            // Расписание
             switch (currentDay) {
                 case "Monday":
                     if (currentTime >= "08:00" && currentTime <= "21:00") {
-                        worker = "Максим";
-                        phone = "+79963790514"; // Номер телефона Максима
+                        worker = "Назаров Максим Александрович";
+                        phone = "+79963790514";
                     }
                     break;
-
                 case "Tuesday":
                 case "Wednesday":
                 case "Thursday":
                     if (currentTime >= "08:00" && currentTime < "12:00") {
-                        worker = "Максим";
-                        phone = "+79963790514"; // Номер телефона Максима
+                        worker = "Назаров Максим Александрович";
+                        phone = "+79963790514";
                     } else if (currentTime >= "12:00" && currentTime <= "21:00") {
-                        worker = "Иван";
-                        phone = "+79963827993"; // Номер телефона Ивана
+                        worker = "Осягин Иван Дмитриевич";
+                        phone = "+79963827993";
                     }
                     break;
-
                 case "Friday":
                     if (currentTime >= "08:00" && currentTime <= "21:00") {
-                        worker = "Иван";
-                        phone = "+79963827993"; // Номер телефона Ивана
+                        worker = "Осягин Иван Дмитриевич";
+                        phone = "+79963827993";
                     }
                     break;
-
                 case "Saturday":
                     if (currentTime >= "08:00" && currentTime < "12:00") {
-                        worker = "Иван";
-                        phone = "+79963827993"; // Номер телефона Ивана
+                        worker = "Осягин Иван Дмитриевич";
+                        phone = "+79963827993";
                     } else if (currentTime >= "12:00" && currentTime <= "19:00") {
-                        worker = "Максим";
-                        phone = "+79963790514"; // Номер телефона Максима
+                        worker = "Назаров Максим Александрович";
+                        phone = "+79963790514";
                     }
                     break;
-
                 case "Sunday":
                     worker = "Выходной";
-                    phone = ""; // В выходной нет номера телефона
+                    phone = "";
                     break;
             }
 
-            // Выводим, кто сейчас работает с возможностью звонка
             if (phone) {
-                document.getElementById("worker").innerHTML = `<a href="tel:${phone}" style="color:green; text-decoration:none;">${worker}</a>`;
+                document.getElementById("worker").innerHTML = `<a href="tel:${phone}" style="color:green; text-decoration:none;">Сейчас работает: ${worker}</a>`;
             } else {
                 document.getElementById("worker").innerText = worker;
             }
         }
 
-        // Запускаем функцию при загрузке страницы
-        whoIsWorkingNow();
+        function toggleAnswer() {
+            let answer = document.getElementById("answer");
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        }
 
-        // Обновляем каждую минуту, чтобы информация была актуальной
+        whoIsWorkingNow();
         setInterval(whoIsWorkingNow, 60000);
     </script>
 </body>
