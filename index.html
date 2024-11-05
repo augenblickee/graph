@@ -56,20 +56,16 @@
         .question-toggle {
             font-size: 16px;
             color: #006400;
-            cursor: pointer;
             text-decoration: underline;
         }
         .answer {
             max-height: 0;
-            overflow: hidden;
             transition: max-height 0.5s ease-out;
             margin-top: 10px;
             font-size: 16px;
             color: #333;
         }
-        .question-toggle:hover {
-            color: black;
-        }
+
 
         .fio {
             font-size: 18px;
@@ -94,21 +90,23 @@
 </head>
 <body>
     <header>
-        <img src="nstu.png" alt="Логотип НГТУ">
+        <a href="https://business.nstu.ru/"><img src="nstu.png" alt="Логотип НГТУ"></a>
         <h1>ЛКС ФБ НГТУ, 6 корпус 707 кабинет</h1>
     </header>
     <div id="worker">Загрузка...</div>
     <div class="fio"> Нажмите на ФИО для звонка</div>
 
     <div class="question-section">
-        <span class="question-toggle" onclick="toggleAnswer()">По каким вопросам обращаться?</span>
-        <div id="answer" class="answer">
+        <span class="question-toggle">По каким вопросам обращаться?</span>
             <ul>
                 <li>
                     Не функционирует техника: не включается компьютер, монитор, телевизор, не работает или некорректно работает принтер и так далее.
                 </li>
                 <li>
                     Подключение микрофона или веб-камеры для проведения онлайн-конференции
+                </li>
+                <li>
+                    Соглосование мероприятий конференц-зала ФБ/ФГО
                 </li>
             </ul>
             <i>Если в рамках дисциплины необходима установка нового програмного обеспечения - обращайтесь в 6-705а</i>
@@ -180,15 +178,6 @@
                 document.getElementById("worker").innerHTML = `<a href="tel:${phone}" style="color:green; text-decoration:none;">Сейчас работает: ${worker}</a>`;
             } else {
                 document.getElementById("worker").innerText = worker;
-            }
-        }
-
-        function toggleAnswer() {
-            let answer = document.getElementById("answer");
-            if (answer.style.maxHeight) {
-                answer.style.maxHeight = null;
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + "px";
             }
         }
 
