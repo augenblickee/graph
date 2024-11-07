@@ -19,12 +19,10 @@
             background-color: whitesmoke;
             color: white;
         }
-        h1 {
-            font-size: 20px;
-        }
         header img {
-            height: 50px;
+            height: 20px;
             margin-right: 15px;
+
         }
         h1 {
             font-size: 24px;
@@ -69,9 +67,14 @@
             color: #333;
         }
 
-
         .fio {
             font-size: 18px;
+            color: #006400;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .fio2 {
+            font-size: 32px;
             color: #006400;
             text-align: center;
             margin: 10px 0;
@@ -93,11 +96,12 @@
 </head>
 <body>
     <header>
-        <a href="https://business.nstu.ru/"><img src="nstu.png" style='width=50%' alt="Логотип НГТУ"></a>
-        <h1>ЛКС ФБ НГТУ, 6 корпус 707 кабинет</h1>
+        <a href="https://business.nstu.ru/"><img src="nstu.png" alt="Логотип НГТУ"></a>
+        <h1>Техническая поддержка ФБ, 6-707</h1>
     </header>
+    <div class="fio2">Сейчас работает: </div>
     <div id="worker">Загрузка...</div>
-    <div class="fio"> Нажмите на ФИО для звонка</div>
+    <div class="fio" id="teleph"> Нажмите на ФИО для звонка</div>
 
     <div class="question-section">
         <span class="question-toggle">По каким вопросам обращаться?</span>
@@ -112,7 +116,10 @@
                     Соглосование мероприятий конференц-зала ФБ/ФГО
                 </li>
             </ul>
-            <i>Если в рамках дисциплины необходима установка нового програмного обеспечения - обращайтесь в 6-705а</i>
+            <i>
+                Если в рамках дисциплины необходима установка нового програмного обеспечения - обращайтесь в 6-705а (Алексей Васильевич Власов)
+                <a href="mailto:alexey.vlasov@fb.nstu.ru">alexey.vlasov@fb.nstu.ru</a>
+            </i>
         </div>
     </div>
 
@@ -178,7 +185,8 @@
             }
 
             if (phone) {
-                document.getElementById("worker").innerHTML = `<a href="tel:${phone}" style="color:green; text-decoration:none;">Сейчас работает: ${worker}</a>`;
+                document.getElementById("worker").innerHTML = worker;
+                document.getElementById('teleph').innerHTML = `<a href="tel:${phone}" style="color:green; text-decoration:none;">Нажмите для звонка &#9742;</a>`;
             } else {
                 document.getElementById("worker").innerText = worker;
             }
