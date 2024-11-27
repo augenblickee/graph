@@ -187,6 +187,7 @@
             if (phone) {
                 document.getElementById("worker").innerHTML = worker;
                 document.getElementById('teleph').innerHTML = `<a href="tel:${phone}" style="color:green; text-decoration:none;">Нажмите для звонка &#9742;</a>`;
+                document.getElementById('teleph').innerHTML = phone;
             } else {
                 document.getElementById("worker").innerText = worker;
             }
